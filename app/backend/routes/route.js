@@ -10,7 +10,7 @@ taskRoutes.post('/', async (req, res)=>{
             task: task
         });
 
-        return res.status(200).json({status: "success", data})
+        return res.status(200).json(data)
     }catch(error){
         console.log(error);
         return res.status(500).json({status: "failed", message: error})
@@ -19,8 +19,8 @@ taskRoutes.post('/', async (req, res)=>{
 
 taskRoutes.get("/", async (req, res)=>{
     try{
-        const task = await Task.find()
-        return res.status(200).json({status: "success", task})
+        const task = await Task.find().sort({ createdAt: -1 })
+        return res.status(200).json(task)
     }catch(error){
         return res.status(500).json({status: "failed", message: error})
     }
@@ -32,7 +32,7 @@ taskRoutes.put("/:id", async (req, res)=>{
             { _id: req.params.id },
             req.body
         );
-        return res.status(200).json({status: "success", task})
+        return res.status(200).json(task)
     }catch(error){
         return res.status(500).json({status: "failed", message: error})
     }
