@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 const TodoForm = ({ onAdd }) => {
-  const [title, setTitle] = useState("");
+  const [task, setTitle] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim()) return;
-    onAdd({ title, completed: false });
+    if (!task.trim()) return;
+    onAdd({ task, completed: false });
     setTitle("");
   };
 
@@ -15,7 +15,7 @@ const TodoForm = ({ onAdd }) => {
       <input
         type="text"
         placeholder="Enter todo..."
-        value={title}
+        value={task}
         onChange={(e) => setTitle(e.target.value)}
         style={{ padding: "8px", width: "250px" }}
       />

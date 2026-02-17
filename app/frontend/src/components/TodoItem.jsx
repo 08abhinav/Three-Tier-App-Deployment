@@ -16,7 +16,7 @@ const TodoItem = ({ todo, onDelete, onToggle }) => {
         }}
         onClick={() => onToggle(todo)}
       >
-        {todo.title}
+        {todo.task}
       </span>
       <button onClick={() => onDelete(todo._id)}>Delete</button>
     </div>
