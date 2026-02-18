@@ -2,7 +2,7 @@ FROM node:22.12-apline as builder
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+RUN npm run build
 
 FROM nginx:alpine
 
