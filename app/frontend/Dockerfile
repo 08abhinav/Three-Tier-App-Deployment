@@ -1,4 +1,4 @@
-FROM node:22.12-apline as builder
+FROM node:20-apline as builder
 WORKDIR /app
 
 COPY package*.json ./
