@@ -5,6 +5,8 @@ COPY package*.json ./
 RUN npm ci
 
 FROM node:22-alpine AS production
+RUN addgroup -S nodejs && adduser -S nodejs -G nodejs
+
 WORKDIR /app
 
 COPY --from=base /app/node_modules ./node_modules
