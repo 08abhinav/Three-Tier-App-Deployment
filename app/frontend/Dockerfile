@@ -1,4 +1,4 @@
-FROM node:20-apline as builder
+FROM node:21-apline as builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -7,7 +7,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginx:1.25.3-alpine
 
 RUN rm -rf /usr/share/nginx/html/*
 
