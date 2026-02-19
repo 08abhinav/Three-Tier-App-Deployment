@@ -1,53 +1,77 @@
 import express from 'express'
-import Task from "../models/task.js"
+import { getDB } from "../db/dbConnection.js"
 
 const taskRoutes = express.Router()
 
-taskRoutes.post('/', async (req, res)=>{
-    try{
-        const { task } = req.body;
-        const data = await Task.create({
-            task: task
-        });
+/* CREATE */
+taskRoutes.post('/', async (req, res) => {
+  try {
+    const { task } = req.body;
+    const db = getDB();
 
-        return res.status(200).json(data)
-    }catch(error){
-        console.log(error);
-        return res.status(500).json({status: "failed", message: error})
-    }
-})
+    const [result] = await db.query(
+      "INSERT INTO tasks (task) VALUES (?)",
+      [task]
+    );
 
-taskRoutes.get("/", async (req, res)=>{
-    try{
-        const task = await Task.find().sort({ createdAt: -1 })
-        return res.status(200).json(task)
-    }catch(error){
-        return res.status(500).json({status: "failed", message: error})
-    }
-})
+    return res.status(201).json({
+      id: result.insertId,
+      task
+    });
 
-taskRoutes.put("/:id", async (req, res)=>{
-    try{
-        const task = await Task.findOneAndUpdate(
-            { _id: req.params.id },
-            req.body
-        );
-        return res.status(200).json(task)
-    }catch(error){
-        return res.status(500).json({status: "failed", message: error})
-    }
-})
+  } catch (error) {
+    return res.status(500).json({ status: "failed", message: error.message });
+  }
+});
 
-taskRoutes.delete("/:id", async (req, res)=>{
-    try{
-        await Task.findOneAndDelete(
-            { _id: req.params.id },
-            req.body
-        );
-        return res.status(200).json({status: "success"})
-    }catch(error){
-        return res.status(500).json({status: "failed", message: error})
-    }
-})
+/* READ */
+taskRoutes.get("/", async (req, res) => {
+  try {
+    const db = getDB();
+    const [rows] = await db.query(
+      "SELECT * FROM tasks ORDER BY created_at DESC"
+    );
+
+    return res.status(200).json(rows);
+
+  } catch (error) {
+    return res.status(500).json({ status: "failed", message: error.message });
+  }
+});
+
+/* UPDATE */
+taskRoutes.put("/:id", async (req, res) => {
+  try {
+    const { task } = req.body;
+    const db = getDB();
+
+    await db.query(
+      "UPDATE tasks SET task = ? WHERE id = ?",
+      [task, req.params.id]
+    );
+
+    return res.status(200).json({ status: "updated" });
+
+  } catch (error) {
+    return res.status(500).json({ status: "failed", message: error.message });
+  }
+});
+
+/* DELETE */
+taskRoutes.delete("/:id", async (req, res) => {
+  try {
+    const db = getDB();
+
+    await db.query(
+      "DELETE FROM tasks WHERE id = ?",
+      [req.params.id]
+    );
+
+    return res.status(200).json({ status: "deleted" });
+
+  } catch (error) {
+    return res.status(500).json({ status: "failed", message: error.message });
+  }
+});
 
 export default taskRoutes;
