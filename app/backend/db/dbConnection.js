@@ -1,12 +1,10 @@
-import "dotenv/config"
-import mongoose from "mongoose";
+let pool;
 
+export const setDB = (dbInstance) => {
+  pool = dbInstance;
+};
 
-export const connectDB = async ()=>{
-    try{
-        await mongoose.connect(process.env.MONGODB_URI)
-        console.log("Database connected successfully");
-    }catch(error){
-        console.log("Database connection issue", error)
-    }
-}
+export const getDB = () => {
+  if (!pool) throw new Error("DB not initialized");
+  return pool;
+};
