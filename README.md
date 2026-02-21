@@ -34,13 +34,22 @@ This project follows a classic **Three-Tier Architecture**:
 
 ---
 
-## 📂 Project Structure
-$tree
-.
+## Project Structure
+```text
+Three-Tier-App-Deployment
+|
 ├── .github/
-├── backend/        # Node.js backend APIs
-├── frontend/       # React application
-└── Architecture.png
+|    └── workflows/
+|        └── backend.yml
+|        └── frontend.yml
+├── app/
+|   └── backend/     # Node.js backend APIs
+|   └── frontend/    # React application 
+|
+├── Architecture.png
+├── README.md
+|
+```
 ---
 
 ## Local Development Setup
