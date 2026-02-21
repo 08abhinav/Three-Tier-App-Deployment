@@ -32,4 +32,5 @@ jobs:
         with:
           context: app/backend
           path: app/backend/Dockerfile
+          push: true
           tags: 804867352391.dkr.ecr.us-east-1.amazonaws.com/dev/backend:${{github.run_number}}
