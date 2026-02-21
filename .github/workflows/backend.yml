@@ -33,4 +33,4 @@ jobs:
           context: app/backend
           path: app/backend/Dockerfile
           push: true
-          tags: ${{variables.AWS_ECR_LINK}}:${{github.run_number}}
+          tags: ${{vars.AWS_ECR_LINK}}:${{github.run_number}}
