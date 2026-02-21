@@ -35,6 +35,7 @@ This project follows a classic **Three-Tier Architecture**:
 ---
 
 ## 📂 Project Structure
+$tree
 .
 ├── .github/
 ├── backend/        # Node.js backend APIs
