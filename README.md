@@ -29,12 +29,14 @@ This project follows a classic **Three-Tier Architecture**:
 - **Backend:** Node.js (Express)  
 - **Database:** AWS Aurora RDS (MySQL)  
 - **Containerization:** Docker  
+- **CI/CD:** Github Actions
 - **Cloud:** AWS  
 
 ---
 
 ## 📂 Project Structure
-│
+.
+├── .github/
 ├── backend/        # Node.js backend APIs
 ├── frontend/       # React application
 └── Architecture.png
@@ -91,3 +93,113 @@ docker build -t task-frontend .
 - Create a docker-compose.yaml file and define all the required services in it.
 - For reference:
 `https://github.com/AmanPathak-DevOps/Student-Teacher-Portal-Three-Tier-Application/blob/ecs-deployment/docker-compose.yaml`
+
+---
+
+## 🚀 GitHub Actions Setup
+
+This project uses **GitHub Actions** to automatically build and push Docker images to **AWS Elastic Container Registry (ECR)**.
+
+---
+
+## 📁 Workflow Location
+
+Navigate to the workflows directory:
+
+```bash
+cd .github/workflows
+```
+
+You should see two workflow files:
+
+- `backend.yml`
+- `frontend.yml`
+
+---
+
+## Workflow Execution Flow
+
+Both workflow files run on **GitHub-hosted runners** and follow the sequence below:
+
+---
+
+### 1️ Checkout Repository
+
+- Uses `actions/checkout`
+- Pulls the latest commit from the repository
+
+---
+
+### 2️ Configure AWS Credentials
+
+AWS credentials are configured using **GitHub Repository Secrets**.
+
+Go to:
+
+```
+GitHub Repository
+→ Settings
+→ Secrets and variables
+→ Actions
+→ New repository secret
+```
+
+### Required Secrets
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION`
+
+> ⚠️ Never hardcode AWS credentials inside workflow files.
+
+---
+
+### 3️ Login to AWS ECR
+
+The workflow logs in to AWS ECR using:
+
+```
+aws-actions/amazon-ecr-login@v2
+```
+
+---
+
+### 4️ Build and Push Docker Image
+
+- Builds the image from:
+
+```
+app/<directory>/Dockerfile
+```
+
+- Make sure you provide your **ECR repository URI** in the workflow file.
+
+Example format:
+
+```
+<account-id>.dkr.ecr.<region>.amazonaws.com/<repository-name>
+```
+
+---
+
+## Final Steps
+
+1. Commit and push your changes.
+2. Go to the **Actions** tab in your GitHub repository.
+3. You will see the workflow running.
+4. After successful execution:
+   - Log in to AWS Console
+   - Search for **ECR**
+   - Open your repository (e.g., `dev/backend`)
+   - Verify the latest image has been pushed successfully
+
+---
+
+## ⚠️ Important Notes
+
+- Ensure your IAM user has permission:
+  - `AmazonEC2ContainerRegistryFullAccess`
+- Make sure the ECR repository is created before pushing.
+- Always store sensitive data inside GitHub Secrets.
+
+---
