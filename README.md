@@ -106,13 +106,13 @@ docker build -t task-frontend .
 
 ---
 
-## 🚀 GitHub Actions Setup
+## GitHub Actions Setup
 
 This project uses **GitHub Actions** to automatically build and push Docker images to **AWS Elastic Container Registry (ECR)**.
 
 ---
 
-## 📁 Workflow Location
+## Workflow Location
 
 Navigate to the workflows directory:
 
@@ -213,3 +213,16 @@ Example format:
 - Always store sensitive data inside GitHub Secrets.
 
 ---
+## Learning Outcomes
+
+- **ECR (Elastic Container Registry)**  
+  Learned how to securely store, manage, and version Docker container images in AWS, and integrate them into CI/CD pipelines.
+
+- **ECS (Elastic Container Service)**  
+  Understood how to deploy, manage, and scale containerized applications using AWS-managed orchestration with Fargate.
+
+- **GitHub Actions**  
+  Gained hands-on experience building CI/CD workflows to automate building, and deployment directly from GitHub repositories.
+
+- **Docker**  
+  Learned how to containerize applications using Dockerfiles, manage multi-container setups, and ensure consistent environments across development and production.
