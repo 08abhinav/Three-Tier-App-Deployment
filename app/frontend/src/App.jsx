@@ -51,7 +51,7 @@ function App() {
     try {
       await deleteTodo(id);
 
-      setTodos((prev) => prev.filter((todo) => todo._id !== id));
+      setTodos((prev) => prev.filter((todo) => todo.id !== id));
     } catch (err) {
       console.error(err);
     }
@@ -60,13 +60,13 @@ function App() {
   // Toggle completed
   const handleToggle = async (todo) => {
     try {
-      const res = await updateTodo(todo._id, {
+      const res = await updateTodo(todo.id, {
         ...todo,
         completed: !todo.completed,
       });
 
       setTodos((prev) =>
-        prev.map((t) => (t._id === todo._id ? res.data : t))
+        prev.map((t) => (t.id === todo.id ? res.data : t))
       );
     } catch (err) {
       console.error(err);

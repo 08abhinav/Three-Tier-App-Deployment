@@ -18,7 +18,7 @@ const TodoItem = ({ todo, onDelete, onToggle }) => {
       >
         {todo.task}
       </span>
-      <button onClick={() => onDelete(todo._id)}>Delete</button>
+      <button onClick={() => onDelete(todo.id)}>Delete</button>
     </div>
   );
 };
