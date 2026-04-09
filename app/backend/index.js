@@ -8,6 +8,8 @@ import { SSMClient, GetParametersCommand } from "@aws-sdk/client-ssm"
 
 const app = express()
 const REGION = process.env.AWS_REGION || "us-east-1";
+const USE_AWS_CONFIG = process.env.USE_AWS_CONFIG === "true"
+
 const ssm = new SSMClient({ region: REGION });
 let db;   
 
@@ -20,6 +22,17 @@ app.use("/api/tasks", taskRoutes);
 /* ------------------ FETCH DB CONFIG FROM SSM ------------------ */
 
 async function getDBConfig() {
+  if(!USE_AWS_CONFIG){
+    console.log("Using local MySQL config");
+    return{
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWD,
+      name: process.env.DB_NAME
+    }
+  }
+  
+  console.log("Using AWS Config")
   const command = new GetParametersCommand({
     Names: [
       "/myapp/db/host",
@@ -74,7 +87,7 @@ async function connectWithRetry(retries = 10, delay = 3000) {
         ssl: { rejectUnauthorized: false }
       });
 
-      console.log("✅ Connected to RDS");
+      console.log("Connected to RDS");
       return pool;
     } catch (err) {
       console.error(`❌ DB connection failed (attempt ${i})`, err.message);
@@ -133,12 +146,12 @@ app.get('/health/db', async (req, res) => {
 
 (async()=>{
     try{
-        db = await connectWithRetry();
-        setDB(db);
-        await ensureTables(db);
-        const port = process.env.PORT || 8500
+      db = await connectWithRetry();
+      setDB(db);
+      await ensureTables(db);
+      const port = process.env.PORT || 8500
 
-        app.listen(port, ()=> console.log(`App listening on: ${port}`))
+      app.listen(port, ()=> console.log(`App listening on: ${port}`))
 
     }catch(error){
         console.log("App failed: ", error)
