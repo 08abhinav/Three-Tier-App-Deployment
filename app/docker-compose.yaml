@@ -1,0 +1,56 @@
+services:
+  database:
+    container_name: mysql_container
+    image: mysql:8.0.40-oraclelinux9
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWD}
+      MYSQL_DATABASE: ${DB_NAME}
+    volumes:
+     - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - three-tier
+  
+  backend:
+    container_name: three_tier_backend
+    build:
+      context: ./backend
+    image: three_tier_backend_image
+    ports:
+      - 8500:8500
+    environment:
+      DB_HOST: database
+      DB_USER: ${DB_USER}
+      DB_PASSWD: ${DB_PASSWD}
+      DB_NAME: ${DB_NAME}
+      USE_AWS_CONFIG: false
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - three-tier
+  
+  frontend:
+    container_name: three_tier_frontend
+    build: 
+      context: ./frontend
+    image: three_tier_frontend_image
+    ports:
+      - 80:80
+    depends_on:
+      backend:
+        condition: service_started
+    networks:
+      - three-tier
+
+volumes:
+  mysql-data:
+
+networks:
+  three-tier:
