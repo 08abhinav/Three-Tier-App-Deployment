@@ -8,7 +8,7 @@ A simple **Task Management Application** built using a modern **Three-Tier Archi
 
 This project follows a classic **Three-Tier Architecture**:
 
-1. **Frontend (Presentation Layer)**
+1. **Frontend**
    - Built with **React**
    - Handles UI and user interaction
 
