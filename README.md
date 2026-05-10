@@ -12,12 +12,12 @@ This project follows a classic **Three-Tier Architecture**:
    - Built with **React**
    - Handles UI and user interaction
 
-2. **Backend (Application Layer)**
+2. **Backend**
    - Built with **Node.js**
    - Exposes REST APIs
    - Connects to database
 
-3. **Database (Data Layer)**
+3. **Database**
    - AWS Aurora (MySQL-compatible RDS)
    - Stores task data persistently
 
