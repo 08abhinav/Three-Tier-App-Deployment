@@ -1,11 +1,9 @@
 # Three-Tier Application Deployment
 
 A simple **Task Management Application** built using a modern **Three-Tier Architecture** and deployed using containerization.
-
 ---
 
 ## Architecture Overview
-
 This project follows a classic **Three-Tier Architecture**:
 
 1. **Frontend**
