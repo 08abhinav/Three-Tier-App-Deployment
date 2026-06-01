@@ -53,7 +53,6 @@ Three-Tier-App-Deployment
 ## Local Development Setup
 
 ### Clone Repository
-
 ```bash
 git clone https://github.com/08abhinav/Three-Tier-App-Deployment.git
 cd Three-Tier-App-Deployment
@@ -105,9 +104,7 @@ docker build -t task-frontend .
 ---
 
 ## GitHub Actions Setup
-
 This project uses **GitHub Actions** to automatically build and push Docker images to **AWS Elastic Container Registry (ECR)**.
-
 ---
 
 ## Workflow Location
