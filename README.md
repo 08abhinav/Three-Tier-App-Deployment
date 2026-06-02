@@ -107,7 +107,6 @@ This project uses **GitHub Actions** to automatically build and push Docker imag
 ---
 
 ## Workflow Location
-
 Navigate to the workflows directory:
 
 ```bash
@@ -115,7 +114,6 @@ cd .github/workflows
 ```
 
 You should see two workflow files:
-
 - `backend.yml`
 - `frontend.yml`
 
