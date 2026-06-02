@@ -22,7 +22,6 @@ This project follows a classic **Three-Tier Architecture**:
 ---
 
 ## Tech Stack
-
 - **Frontend:** React  
 - **Backend:** Node.js (Express)  
 - **Database:** AWS Aurora RDS (MySQL)  
