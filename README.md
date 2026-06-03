@@ -120,7 +120,6 @@ You should see two workflow files:
 ---
 
 ## Workflow Execution Flow
-
 Both workflow files run on **GitHub-hosted runners** and follow the sequence below:
 
 ---
@@ -145,7 +144,6 @@ GitHub Repository
 ```
 
 ### Required Secrets
-
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `AWS_REGION`
@@ -155,7 +153,6 @@ GitHub Repository
 ---
 
 ### 3️ Login to AWS ECR
-
 The workflow logs in to AWS ECR using:
 
 ```
