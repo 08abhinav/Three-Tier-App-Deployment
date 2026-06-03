@@ -193,7 +193,6 @@ Example format:
 ---
 
 ## ⚠️ Important Notes
-
 - Ensure your IAM user has permission:
   - `AmazonEC2ContainerRegistryFullAccess`
 - Make sure the ECR repository is created before pushing.
@@ -201,7 +200,6 @@ Example format:
 
 ---
 ## Learning Outcomes
-
 - **ECR (Elastic Container Registry)**  
   Learned how to securely store, manage, and version Docker container images in AWS, and integrate them into CI/CD pipelines.
 
