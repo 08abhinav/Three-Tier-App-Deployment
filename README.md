@@ -126,14 +126,12 @@ Both workflow files run on **GitHub-hosted runners** and follow the sequence bel
 ---
 
 ### 1️ Checkout Repository
-
 - Uses `actions/checkout`
 - Pulls the latest commit from the repository
 
 ---
 
 ### 2️ Configure AWS Credentials
-
 AWS credentials are configured using **GitHub Repository Secrets**.
 
 Go to:
